@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y git make yasm pkg-config
 
 RUN git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers \
   && cd nv-codec-headers \
-  && git checkout 250292d \
+  && git checkout sdk/9.0 \
   && make install
 
 RUN git clone https://git.ffmpeg.org/ffmpeg.git \
@@ -24,3 +24,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,video,utility
 
 COPY --from=builder /tmp/ffmpeg/ffmpeg /usr/local/bin/ffmpeg
 COPY --from=builder /tmp/ffmpeg/ffprobe /usr/local/bin/ffprobe
+
+RUN apt-get update && apt-get install curl
+
+ENTRYPOINT ["/usr/local/bin/ffmpeg"]
