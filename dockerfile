@@ -25,6 +25,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,video,utility
 COPY --from=builder /tmp/ffmpeg/ffmpeg /usr/local/bin/ffmpeg
 COPY --from=builder /tmp/ffmpeg/ffprobe /usr/local/bin/ffprobe
 
-RUN apt-get update && apt-get install curl
+RUN apt-get update && apt-get install -y curl
 
 ENTRYPOINT ["/usr/local/bin/ffmpeg"]
